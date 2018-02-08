@@ -1,0 +1,5 @@
+services:
+	-
+		class: Proget\PHPStan\Yii2\Reflection\BaseYiiMethodsClassReflectionExtension
+		tags:
+			- phpstan.broker.methodsClassReflectionExtension
