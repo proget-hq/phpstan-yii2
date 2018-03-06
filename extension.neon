@@ -1,5 +1,15 @@
 services:
 	-
-		class: Proget\PHPStan\Yii2\Reflection\BaseYiiMethodsClassReflectionExtension
-		tags:
-			- phpstan.broker.methodsClassReflectionExtension
+		class: Proget\PHPStan\Yii2\Type\ContainerDynamicMethodReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+	- Proget\PHPStan\Yii2\ServiceMap(%yii2.config_path%)
+parameters:
+    ignoreErrors:
+        - '#Access to an undefined property yii\\db\\ActiveRecord#'
+        - '#Call to an undefined method yii\\db\\ActiveRecord#'
+        - '#Call to an undefined method yii\\console\\Request#'
+        - '#Access to an undefined property yii\\console\\Request#'
+        - '#Call to an undefined method yii\\console\\Response#'
+        - '#Access to an undefined property yii\\console\\Response#'
+        - '#Method yii\\db\\ActiveQuery\:\:with\(\) invoked with#'
