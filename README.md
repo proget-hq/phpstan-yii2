@@ -3,7 +3,8 @@
 ## What does it do?
 
 * Provides correct return type for `Yii::$container->get('service_id')` method,
-* Ignore common problems with active record and request/response objects.
+* Provides correct methods and properties for `Yii::$app->request`
+* Ignore common problems with response objects (to be removed).
 
 ## Installation
 
