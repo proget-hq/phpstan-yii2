@@ -3,6 +3,9 @@ services:
         class: Proget\PHPStan\Yii2\Type\ContainerDynamicMethodReturnTypeExtension
         tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
     -
+        class: Proget\PHPStan\Yii2\Type\ActiveRecordDynamicStaticMethodReturnTypeExtension
+        tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
+    -
         class: Proget\PHPStan\Yii2\Reflection\RequestMethodsClassReflectionExtension
         tags: [phpstan.broker.methodsClassReflectionExtension]
     -

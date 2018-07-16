@@ -1,11 +1,9 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace Proget\PHPStan\Yii2\Reflection;
 
-
-use PHPStan\Analyser\Scope;
 use PHPStan\Broker\Broker;
 use PHPStan\Reflection\BrokerAwareExtension;
 use PHPStan\Reflection\ClassReflection;
@@ -19,7 +17,7 @@ final class RequestMethodsClassReflectionExtension implements MethodsClassReflec
      */
     private $broker;
 
-    public function setBroker(Broker $broker)
+    public function setBroker(Broker $broker): void
     {
         $this->broker = $broker;
     }
@@ -41,5 +39,4 @@ final class RequestMethodsClassReflectionExtension implements MethodsClassReflec
 
         return $webRequest->getNativeMethod($methodName);
     }
-
 }
