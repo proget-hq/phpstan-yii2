@@ -1,14 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace Proget\PHPStan\Yii2\Type;
-
 
 use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
+use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
@@ -45,7 +45,6 @@ final class ContainerDynamicMethodReturnTypeExtension implements DynamicMethodRe
             }
         }
 
-        return $methodReflection->getReturnType();
+        return ParametersAcceptorSelector::selectSingle($methodReflection->getVariants())->getReturnType();
     }
-
 }
