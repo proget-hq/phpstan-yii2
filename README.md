@@ -6,6 +6,14 @@
 * Provides correct methods and properties for `Yii::$app->request`
 * Ignore common problems with response objects (to be removed).
 
+## Compatibility
+
+| PHPStan version | Yii2 extension version |
+| --------------- | ---------------------- |
+| 0.10.3          | 0.4.0                  |
+| 0.10            | 0.3.0                  |
+| 0.9.2           | 0.2.0                  |
+
 ## Installation
 
 ```sh
