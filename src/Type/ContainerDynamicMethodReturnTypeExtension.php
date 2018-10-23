@@ -38,9 +38,9 @@ final class ContainerDynamicMethodReturnTypeExtension implements DynamicMethodRe
 
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
     {
-        if(isset($methodCall->args[0]) && $methodCall->args[0] instanceof Arg) {
+        if (isset($methodCall->args[0]) && $methodCall->args[0] instanceof Arg) {
             $serviceClass = $this->serviceMap->getServiceClassFromNode($methodCall->args[0]->value);
-            if($serviceClass !== null) {
+            if ($serviceClass !== null) {
                 return new ObjectType($serviceClass);
             }
         }

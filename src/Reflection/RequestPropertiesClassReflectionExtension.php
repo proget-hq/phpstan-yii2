@@ -35,7 +35,7 @@ final class RequestPropertiesClassReflectionExtension implements PropertiesClass
 
     public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
     {
-        if($classReflection->getName()!=='yii\console\Request') {
+        if ($classReflection->getName() !== 'yii\console\Request') {
             return false;
         }
 
