@@ -15,7 +15,7 @@ final class ServiceMap
 
     public function __construct(string $configPath)
     {
-        if(!file_exists($configPath)) {
+        if (!file_exists($configPath)) {
             throw new \InvalidArgumentException(sprintf('Provided config path %s must exist', $configPath));
         }
 
@@ -25,9 +25,9 @@ final class ServiceMap
 
         $config = require $configPath;
         foreach ($config['container']['singletons'] as $id => $service) {
-            if($service instanceof \Closure || \is_string($service)) {
+            if ($service instanceof \Closure || \is_string($service)) {
                 $returnType = (new \ReflectionFunction($service))->getReturnType();
-                if(!$returnType instanceof \ReflectionType) {
+                if (!$returnType instanceof \ReflectionType) {
                     throw new \RuntimeException(sprintf('Please provide return type for %s service closure', $id));
                 }
 
@@ -40,7 +40,7 @@ final class ServiceMap
 
     public function getServiceClassFromNode(Node $node): ?string
     {
-        if($node instanceof Node\Scalar\String_ && isset($this->services[$node->value])) {
+        if ($node instanceof Node\Scalar\String_ && isset($this->services[$node->value])) {
             return $this->services[$node->value];
         }
 

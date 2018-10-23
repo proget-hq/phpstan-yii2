@@ -24,7 +24,7 @@ final class RequestMethodsClassReflectionExtension implements MethodsClassReflec
 
     public function hasMethod(ClassReflection $classReflection, string $methodName): bool
     {
-        if($classReflection->getName()!=='yii\console\Request') {
+        if ($classReflection->getName() !== 'yii\console\Request') {
             return false;
         }
 
