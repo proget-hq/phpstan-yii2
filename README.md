@@ -1,5 +1,11 @@
 # Yii2 extension for PHPStan
 
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg)](https://php.net/)
+[![Latest Stable Version](https://img.shields.io/packagist/v/proget-hq/phpstan-yii2.svg)](https://packagist.org/packages/proget-hq/phpstan-yii2)
+[![Build Status](https://travis-ci.org/proget-hq/phpstan-yii2.svg?branch=master)](https://travis-ci.org/proget-hq/phpstan-yii2)
+[![Total Downloads](https://poser.pugx.org/proget-hq/phpstan-yii2/downloads.svg)](https://packagist.org/packages/proget-hq/phpstan-yii2)
+[![License](https://poser.pugx.org/proget-hq/phpstan-yii2/license.svg)](https://packagist.org/packages/proget-hq/phpstan-yii2)
+
 ## What does it do?
 
 * Provides correct return type for `Yii::$container->get('service_id')` method,
