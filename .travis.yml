@@ -15,7 +15,7 @@ cache:
     - $HOME/.composer/cache
 
 install:
-  - composer install --no-interaction --ignore-platform-reqs
+  - composer install --prefer-dist --no-interaction --ignore-platform-reqs
 
 script:
-  - composer check; fi
+  - composer check
