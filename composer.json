@@ -35,8 +35,8 @@
         "stan": "phpstan analyse -l max -c ./phpstan.neon ./src ./tests",
         "check": [
             "@check-cs",
-            "@tests",
-            "@stan"
+            "@stan",
+            "@tests"
         ]
     }
 }

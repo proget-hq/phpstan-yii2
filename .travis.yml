@@ -1,0 +1,24 @@
+language: php
+
+matrix:
+  fast_finish: true
+
+  include:
+    - os: linux
+      php: '7.0'
+
+    - os: linux
+      php: '7.1'
+
+    - os: linux
+      php: '7.2'
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+install:
+  - composer install --no-interaction --ignore-platform-reqs
+
+script:
+  - composer check; fi
