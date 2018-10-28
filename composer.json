@@ -1,15 +1,23 @@
 {
     "name": "proget-hq/phpstan-yii2",
-    "description": "Yii2 extension for PHPStan",
     "type": "library",
+    "description": "Yii2 extension for PHPStan",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arkadiusz Kondas",
+            "email": "arkadiusz.kondas@gmail.com"
+        }
+    ],
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "nikic/php-parser": "^4.1.0",
+        "phpstan/phpstan": "^0.10.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.0",
+        "friendsofphp/php-cs-fixer": "^2.13",
         "phpstan/phpstan-phpunit": "^0.10",
-        "phpstan/phpstan": "^0.10.3",
-        "friendsofphp/php-cs-fixer": "^2.13"
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
         "psr-4": {
@@ -21,22 +29,15 @@
             "Proget\\Tests\\PHPStan\\Yii2\\": "tests/"
         }
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Arkadiusz Kondas",
-            "email": "arkadiusz.kondas@gmail.com"
-        }
-    ],
     "scripts": {
-        "check-cs": "php-cs-fixer fix --dry-run --diff",
-        "fix-cs": "php-cs-fixer fix",
-        "tests": "phpunit",
-        "stan": "phpstan analyse -l max -c ./phpstan.neon ./src ./tests",
         "check": [
             "@check-cs",
             "@stan",
             "@tests"
-        ]
+        ],
+        "check-cs": "php-cs-fixer fix --dry-run --diff",
+        "fix-cs": "php-cs-fixer fix",
+        "stan": "phpstan analyse -l max -c ./phpstan.neon ./src ./tests",
+        "tests": "phpunit"
     }
 }
