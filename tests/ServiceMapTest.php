@@ -34,4 +34,12 @@ final class ServiceMapTest extends TestCase
         $this->assertSame(\SplObjectStorage::class, $serviceMap->getServiceClassFromNode(new String_('service')));
         $this->assertSame(\SplFileInfo::class, $serviceMap->getServiceClassFromNode(new String_('nested-service-class')));
     }
+
+    /**
+     * @doesNotPerformAssertions
+     */
+    public function testItAllowsConfigWithoutSingletons(): void
+    {
+        new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-no-singletons.php');
+    }
 }
