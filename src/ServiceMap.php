@@ -24,7 +24,7 @@ final class ServiceMap
         \defined('YII_ENV_TEST') or \define('YII_ENV_TEST', true);
 
         $config = require $configPath;
-        foreach ($config['container']['singletons'] as $id => $service) {
+        foreach ($config['container']['singletons'] ?? [] as $id => $service) {
             if ($service instanceof \Closure || \is_string($service)) {
                 $returnType = (new \ReflectionFunction($service))->getReturnType();
                 if (!$returnType instanceof \ReflectionType) {
