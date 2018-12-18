@@ -10,9 +10,6 @@ matrix:
     - os: linux
       php: '7.2'
 
-    - os: linux
-      php: '7.3'
-
 cache:
   directories:
     - $HOME/.composer/cache

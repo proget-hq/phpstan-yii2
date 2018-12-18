@@ -13,9 +13,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  * **Security** in case of vulnerabilities.
  
 ## [0.4.2] 2018-12-18
-### Added
- * Travis build for php 7.3
-
 ### Fixed
  * Allow configuration without singletons (#10)
 
