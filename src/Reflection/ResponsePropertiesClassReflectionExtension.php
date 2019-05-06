@@ -11,7 +11,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\PropertiesClassReflectionExtension;
 use PHPStan\Reflection\PropertyReflection;
 
-final class RequestPropertiesClassReflectionExtension implements PropertiesClassReflectionExtension, BrokerAwareExtension
+final class ResponsePropertiesClassReflectionExtension implements PropertiesClassReflectionExtension, BrokerAwareExtension
 {
     /**
      * @var Broker
@@ -25,15 +25,15 @@ final class RequestPropertiesClassReflectionExtension implements PropertiesClass
 
     public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
     {
-        if ($classReflection->getName() !== 'yii\console\Request') {
+        if ($classReflection->getName() !== 'yii\console\Response') {
             return false;
         }
 
-        return $this->broker->getClass('yii\web\Request')->hasProperty($propertyName);
+        return $this->broker->getClass('yii\web\Response')->hasProperty($propertyName);
     }
 
     public function getProperty(ClassReflection $classReflection, string $propertyName): PropertyReflection
     {
-        return $this->broker->getClass('yii\web\Request')->getProperty($propertyName, new OutOfClassScope());
+        return $this->broker->getClass('yii\web\Response')->getProperty($propertyName, new OutOfClassScope());
     }
 }

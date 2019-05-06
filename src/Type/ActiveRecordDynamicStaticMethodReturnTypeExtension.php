@@ -23,16 +23,23 @@ final class ActiveRecordDynamicStaticMethodReturnTypeExtension implements Dynami
 
     public function isStaticMethodSupported(MethodReflection $methodReflection): bool
     {
-        return $methodReflection->getName() === 'findOne';
+        return \in_array($methodReflection->getName(), ['findOne', 'find'], true);
     }
 
     public function getTypeFromStaticMethodCall(MethodReflection $methodReflection, StaticCall $methodCall, Scope $scope): Type
     {
-        /** @var Name $name */
-        $name = $methodCall->class;
+        /** @var Name $className */
+        $className = $methodCall->class;
+        $name = $scope->resolveName($className);
 
-        return TypeCombinator::union(
-            new NullType(), new ObjectType($name->toString())
-        );
+        $methodName = $methodReflection->getName();
+        if ($methodName === 'findOne') {
+            return TypeCombinator::union(
+                new NullType(),
+                new ObjectType($name)
+            );
+        }
+
+        return new ActiveQueryObjectType($name, false);
     }
 }

@@ -11,7 +11,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  * **Removed** for now removed features.
  * **Fixed** for any bug fixes.
  * **Security** in case of vulnerabilities.
- 
+
+## [0.5.0] 2019-05-06
+### Added
+ * Add support for phpstan 0.11
+ * Extension tests (Yii2 is now a dev dependency)
+
 ## [0.4.2] 2018-12-18
 ### Fixed
  * Allow configuration without singletons (#10)
@@ -27,15 +32,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.4.0] 2018-08-21
 ### Added
  * Add support for phpstan 0.10.3
- 
+
 ## [0.3.0] 2018-06-16
 ### Added
  * Add support for phpstan 0.10
- 
+
 ## [0.2.0] 2018-03-09
 ### Added
  * Provides correct methods and properties for Yii::$app->request
- 
+
 ## [0.1.0] 2018-03-07
 ### Added
  * first initial release

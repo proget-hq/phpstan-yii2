@@ -7,6 +7,7 @@ namespace Proget\Tests\PHPStan\Yii2;
 use PhpParser\Node\Scalar\String_;
 use PHPUnit\Framework\TestCase;
 use Proget\PHPStan\Yii2\ServiceMap;
+use Proget\Tests\PHPStan\Yii2\Yii\MyActiveRecord;
 
 final class ServiceMapTest extends TestCase
 {
@@ -26,13 +27,15 @@ final class ServiceMapTest extends TestCase
         new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-invalid.php');
     }
 
-    public function testItLoadsServices(): void
+    public function testItLoadsServicesAndComponents(): void
     {
         $serviceMap = new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-valid.php');
 
         $this->assertSame(\SplStack::class, $serviceMap->getServiceClassFromNode(new String_('closure')));
         $this->assertSame(\SplObjectStorage::class, $serviceMap->getServiceClassFromNode(new String_('service')));
         $this->assertSame(\SplFileInfo::class, $serviceMap->getServiceClassFromNode(new String_('nested-service-class')));
+
+        $this->assertSame(MyActiveRecord::class, $serviceMap->getComponentClassById('customComponent'));
     }
 
     /**
