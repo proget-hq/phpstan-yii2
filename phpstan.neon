@@ -1,3 +1,14 @@
 includes:
 	- vendor/phpstan/phpstan-phpunit/extension.neon
 	- vendor/phpstan/phpstan-phpunit/rules.neon
+
+	- extension.neon
+
+parameters:
+    autoload_files:
+        - %rootDir%/../../../vendor/yiisoft/yii2/Yii.php
+
+    reportUnmatchedIgnoredErrors: false
+
+    yii2:
+        config_path: %rootDir%/../../../tests/assets/yii-config-valid.php

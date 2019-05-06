@@ -13,6 +13,11 @@ final class ServiceMap
      */
     private $services = [];
 
+    /**
+     * @var string[][]
+     */
+    private $components = [];
+
     public function __construct(string $configPath)
     {
         if (!file_exists($configPath)) {
@@ -36,6 +41,16 @@ final class ServiceMap
                 $this->services[$id] = $service['class'] ?? $service[0]['class'];
             }
         }
+
+        foreach ($config['components'] ?? [] as $id => $component) {
+            if (null !== $identityClass = $component['identityClass'] ?? null) {
+                $this->components[$id]['identityClass'] = $identityClass;
+            }
+
+            if (null !== $class = $component['class'] ?? null) {
+                $this->components[$id]['class'] = $class;
+            }
+        }
     }
 
     public function getServiceClassFromNode(Node $node): ?string
@@ -45,5 +60,15 @@ final class ServiceMap
         }
 
         return null;
+    }
+
+    public function getComponentClassById(string $id): ?string
+    {
+        return $this->components[$id]['class'] ?? null;
+    }
+
+    public function getComponentIdentityClassById(string $id): ?string
+    {
+        return $this->components[$id]['identityClass'] ?? null;
     }
 }

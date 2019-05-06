@@ -28,15 +28,11 @@ final class RequestMethodsClassReflectionExtension implements MethodsClassReflec
             return false;
         }
 
-        $webRequest = $this->broker->getClass('yii\web\Request');
-
-        return $webRequest->hasMethod($methodName);
+        return $this->broker->getClass('yii\web\Request')->hasMethod($methodName);
     }
 
     public function getMethod(ClassReflection $classReflection, string $methodName): MethodReflection
     {
-        $webRequest = $this->broker->getClass('yii\web\Request');
-
-        return $webRequest->getNativeMethod($methodName);
+        return $this->broker->getClass('yii\web\Request')->getNativeMethod($methodName);
     }
 }
