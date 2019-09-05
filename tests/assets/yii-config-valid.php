@@ -7,6 +7,7 @@ return [
         'customComponent' => [
             'class' => MyActiveRecord::class,
         ],
+        'customInitializedComponent' => new MyActiveRecord(),
     ],
     'container' => [
         'singletons' => [
