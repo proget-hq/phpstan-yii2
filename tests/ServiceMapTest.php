@@ -27,6 +27,14 @@ final class ServiceMapTest extends TestCase
         new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-invalid.php');
     }
 
+    public function testThrowExceptionWhenComponentHasInvalidValue(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Invalid value for component with id customComponent. Expected object or array.');
+
+        new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-invalid-component.php');
+    }
+
     public function testItLoadsServicesAndComponents(): void
     {
         $serviceMap = new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-valid.php');
@@ -36,6 +44,7 @@ final class ServiceMapTest extends TestCase
         $this->assertSame(\SplFileInfo::class, $serviceMap->getServiceClassFromNode(new String_('nested-service-class')));
 
         $this->assertSame(MyActiveRecord::class, $serviceMap->getComponentClassById('customComponent'));
+        $this->assertSame(MyActiveRecord::class, $serviceMap->getComponentClassById('customInitializedComponent'));
     }
 
     /**
