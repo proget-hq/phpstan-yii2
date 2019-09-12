@@ -1,6 +1,6 @@
 # Yii2 extension for PHPStan
 
-[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg)](https://php.net/)
+[![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.2-8892BF.svg)](https://php.net/)
 [![Latest Stable Version](https://img.shields.io/packagist/v/proget-hq/phpstan-yii2.svg)](https://packagist.org/packages/proget-hq/phpstan-yii2)
 [![Build Status](https://travis-ci.org/proget-hq/phpstan-yii2.svg?branch=master)](https://travis-ci.org/proget-hq/phpstan-yii2)
 [![Total Downloads](https://poser.pugx.org/proget-hq/phpstan-yii2/downloads.svg)](https://packagist.org/packages/proget-hq/phpstan-yii2)
@@ -16,7 +16,7 @@
 
 | PHPStan version | Yii2 extension version |
 | --------------- | ---------------------- |
-| 0.11            | 0.5.x                  |
+| 0.11            | 0.5.x+                 |
 | 0.10.3          | 0.4.x                  |
 | 0.10            | 0.3.0                  |
 | 0.9.2           | 0.2.0                  |
