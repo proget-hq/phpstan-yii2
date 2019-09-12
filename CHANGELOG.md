@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  * **Fixed** for any bug fixes.
  * **Security** in case of vulnerabilities.
 
+## [0.6.0] 2019-09-12
+### Added
+ * Support for already initialized components (#15)
+ * Support for HeaderCollection.get (#17)
+
+### Changed
+ * Required PHP version to at least 7.2
+
 ## [0.5.0] 2019-05-06
 ### Added
  * Add support for phpstan 0.11
