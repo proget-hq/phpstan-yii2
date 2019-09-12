@@ -74,7 +74,7 @@ final class ServiceMap
     public function getComponentClassById(string $id): ?string
     {
         // Special case in which the component is already initialized
-        if (is_object($this->components[$id])) {
+        if (isset($this->components[$id]) && is_object($this->components[$id])) {
             return get_class($this->components[$id]);
         }
 
