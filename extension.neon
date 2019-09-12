@@ -21,6 +21,9 @@ services:
         class: Proget\PHPStan\Yii2\Type\ActiveRecordDynamicMethodReturnTypeExtension
         tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
     -
+        class: Proget\PHPStan\Yii2\Type\HeaderCollectionDynamicMethodReturnTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+    -
         class: Proget\PHPStan\Yii2\Type\ActiveRecordDynamicStaticMethodReturnTypeExtension
         tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
     -

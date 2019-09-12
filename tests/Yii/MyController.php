@@ -49,5 +49,10 @@ final class MyController extends \yii\web\Controller
         \Yii::createObject(static function (): \SplObjectStorage {
             return new \SplObjectStorage();
         })->count();
+
+        (int)\Yii::$app->request->headers->get('Content-Length');
+        (int)\Yii::$app->request->headers->get('Content-Length', 0, true);
+        $values = \Yii::$app->request->headers->get('X-Key', '', false);
+        reset($values);
     }
 }
