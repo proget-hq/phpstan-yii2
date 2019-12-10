@@ -6,9 +6,9 @@ includes:
 
 parameters:
     autoload_files:
-        - %rootDir%/../../../vendor/yiisoft/yii2/Yii.php
+        - vendor/yiisoft/yii2/Yii.php
 
     reportUnmatchedIgnoredErrors: false
 
     yii2:
-        config_path: %rootDir%/../../../tests/assets/yii-config-valid.php
+        config_path: tests/assets/yii-config-valid.php

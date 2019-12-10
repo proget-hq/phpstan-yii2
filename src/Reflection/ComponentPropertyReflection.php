@@ -60,4 +60,39 @@ final class ComponentPropertyReflection implements PropertyReflection
     {
         return $this->fallbackProperty->isPublic();
     }
+
+    public function getReadableType(): Type
+    {
+        return $this->fallbackProperty->getReadableType();
+    }
+
+    public function getWritableType(): Type
+    {
+        return $this->fallbackProperty->getWritableType();
+    }
+
+    public function canChangeTypeAfterAssignment(): bool
+    {
+        return $this->fallbackProperty->canChangeTypeAfterAssignment();
+    }
+
+    public function isDeprecated(): \PHPStan\TrinaryLogic
+    {
+        return $this->fallbackProperty->isDeprecated();
+    }
+
+    public function getDeprecatedDescription(): ?string
+    {
+        return $this->fallbackProperty->getDeprecatedDescription();
+    }
+
+    public function isInternal(): \PHPStan\TrinaryLogic
+    {
+        return $this->fallbackProperty->isInternal();
+    }
+
+    public function getDocComment(): ?string
+    {
+        return $this->fallbackProperty->getDocComment();
+    }
 }

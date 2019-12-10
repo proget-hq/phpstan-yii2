@@ -16,32 +16,32 @@ final class MyController extends \yii\web\Controller
 
         $record = MyActiveRecord::findOne(['condition']);
         if ($record) {
-            $record->flag;
+            $flag = $record->flag;
         }
 
         $records = MyActiveRecord::find()->asArray()->where(['flag' => \Yii::$app->request->post('flag', true)])->all();
         foreach ($records as $record) {
-            $record['flag'];
+            $flag = $record['flag'];
         }
 
         $records = MyActiveRecord::findAll('condition');
         foreach ($records as $record) {
-            $record->flag;
+            $flag = $record->flag;
         }
 
         $records = MyActiveRecord::find()->asArray(false)->where(['condition'])->all();
         foreach ($records as $record) {
-            $record->flag;
-            $record['flag'];
+            $flag = $record->flag;
+            $flag = $record['flag'];
         }
 
         \Yii::$app->response->data = \Yii::$app->request->rawBody;
 
-        \Yii::$app->user->isGuest;
+        $guest = \Yii::$app->user->isGuest;
         \Yii::$app->user->identity->getAuthKey();
         \Yii::$app->user->identity->doSomething();
 
-        \Yii::$app->customComponent->flag;
+        $flag = \Yii::$app->customComponent->flag;
 
         \Yii::createObject(\SplObjectStorage::class)->count();
         \Yii::createObject('SplObjectStorage')->count();

@@ -7,18 +7,22 @@
         {
             "name": "Arkadiusz Kondas",
             "email": "arkadiusz.kondas@gmail.com"
+        },
+        {
+            "name": "Marcin Michalski",
+            "email": "marcin@michalski.dev"
         }
     ],
     "require": {
         "php": "^7.2",
         "nikic/php-parser": "^4.1.0",
-        "phpstan/phpstan": "^0.11"
+        "phpstan/phpstan": "^0.12"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.13",
         "phpunit/phpunit": "^8.0",
         "yiisoft/yii2": "^2.0.15",
-        "phpstan/phpstan-phpunit": "^0.11"
+        "phpstan/phpstan-phpunit": "^0.12"
     },
     "autoload": {
         "psr-4": {
