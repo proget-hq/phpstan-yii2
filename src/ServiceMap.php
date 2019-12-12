@@ -32,7 +32,7 @@ final class ServiceMap
         foreach ($config['container']['singletons'] ?? [] as $id => $service) {
             if ($service instanceof \Closure || \is_string($service)) {
                 $returnType = (new \ReflectionFunction($service))->getReturnType();
-                if (!$returnType instanceof \ReflectionType) {
+                if (!$returnType instanceof \ReflectionNamedType) {
                     throw new \RuntimeException(sprintf('Please provide return type for %s service closure', $id));
                 }
 

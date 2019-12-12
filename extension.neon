@@ -1,3 +1,15 @@
+parameters:
+    yii2:
+        config_path: null
+
+    ignoreErrors:
+        - '#Call to an undefined method yii\\console\\Response#'
+
+parametersSchema:
+	yii2: structure([
+		config_path: schema(string(), nullable())
+	])
+
 services:
     -
         class: Proget\PHPStan\Yii2\Reflection\ApplicationPropertiesClassReflectionExtension
@@ -34,7 +46,3 @@ services:
         tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
 
     - Proget\PHPStan\Yii2\ServiceMap(%yii2.config_path%)
-
-parameters:
-    ignoreErrors:
-        - '#Call to an undefined method yii\\console\\Response#'

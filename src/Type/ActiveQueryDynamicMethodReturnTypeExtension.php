@@ -41,18 +41,14 @@ final class ActiveQueryDynamicMethodReturnTypeExtension implements DynamicMethod
     {
         $calledOnType = $scope->getType($methodCall->var);
         if (!$calledOnType instanceof ActiveQueryObjectType) {
-            throw new ShouldNotHappenException(
-                sprintf('Unexpected type %s during method call %s at line %d', \get_class($calledOnType), $methodReflection->getName(), $methodCall->getLine())
-            );
+            throw new ShouldNotHappenException(sprintf('Unexpected type %s during method call %s at line %d', \get_class($calledOnType), $methodReflection->getName(), $methodCall->getLine()));
         }
 
         $methodName = $methodReflection->getName();
         if ($methodName === 'asArray') {
             $argType = isset($methodCall->args[0]) ? $scope->getType($methodCall->args[0]->value) : new ConstantBooleanType(true);
             if (!$argType instanceof ConstantBooleanType) {
-                throw new ShouldNotHappenException(
-                    sprintf('Invalid argument provided to asArray method at line %d', $methodCall->getLine())
-                );
+                throw new ShouldNotHappenException(sprintf('Invalid argument provided to asArray method at line %d', $methodCall->getLine()));
             }
 
             return new ActiveQueryObjectType($calledOnType->getModelClass(), $argType->getValue());

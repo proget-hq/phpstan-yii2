@@ -28,9 +28,7 @@ final class ActiveRecordDynamicMethodReturnTypeExtension implements DynamicMetho
     {
         $argType = $scope->getType($methodCall->args[0]->value);
         if (!$argType instanceof ConstantStringType) {
-            throw new ShouldNotHappenException(
-                sprintf('Invalid argument provided to method %s'.PHP_EOL.'Hint: You should use ::class instead of ::className()', $methodReflection->getName())
-            );
+            throw new ShouldNotHappenException(sprintf('Invalid argument provided to method %s'.PHP_EOL.'Hint: You should use ::class instead of ::className()', $methodReflection->getName()));
         }
 
         return new ActiveQueryObjectType($argType->getValue(), false);
