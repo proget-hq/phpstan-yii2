@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  * **Fixed** for any bug fixes.
  * **Security** in case of vulnerabilities.
 
+## [0.7.0] 2019-12-12
+### Added
+ * Support for phpstan 0.12
+ * GitHub actions
+
+### Removed
+ * Travis CI integration
+
 ## [0.6.0] 2019-09-12
 ### Added
  * Support for already initialized components (#15)
