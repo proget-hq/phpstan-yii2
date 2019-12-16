@@ -8,7 +8,5 @@ parameters:
     autoload_files:
         - vendor/yiisoft/yii2/Yii.php
 
-    reportUnmatchedIgnoredErrors: false
-
     yii2:
         config_path: tests/assets/yii-config-valid.php
