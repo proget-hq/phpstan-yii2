@@ -2,9 +2,6 @@ parameters:
     yii2:
         config_path: null
 
-    ignoreErrors:
-        - '#Call to an undefined method yii\\console\\Response#'
-
 parametersSchema:
 	yii2: structure([
 		config_path: schema(string(), nullable())
