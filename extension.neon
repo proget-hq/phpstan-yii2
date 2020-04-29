@@ -1,6 +1,8 @@
 parameters:
     yii2:
         config_path: null
+    stubFiles:
+        - stubs/Yii.stub
 
 parametersSchema:
 	yii2: structure([
@@ -34,12 +36,6 @@ services:
         tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
     -
         class: Proget\PHPStan\Yii2\Type\ActiveRecordDynamicStaticMethodReturnTypeExtension
-        tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
-    -
-        class: Proget\PHPStan\Yii2\Type\ContainerDynamicMethodReturnTypeExtension
-        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
-    -
-        class: Proget\PHPStan\Yii2\Type\YiiDynamicStaticMethodReturnTypeExtension
         tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
 
     - Proget\PHPStan\Yii2\ServiceMap(%yii2.config_path%)
