@@ -37,5 +37,8 @@ services:
     -
         class: Proget\PHPStan\Yii2\Type\ActiveRecordDynamicStaticMethodReturnTypeExtension
         tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
+    -
+        class: Proget\PHPStan\Yii2\Type\ContainerDynamicMethodReturnTypeExtension
+        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
     - Proget\PHPStan\Yii2\ServiceMap(%yii2.config_path%)
