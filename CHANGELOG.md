@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  * **Fixed** for any bug fixes.
  * **Security** in case of vulnerabilities.
 
+## [0.7.2] 2020-05-01
+ * Replace YiiDynamicStaticMethodReturnTypeExtension with a stub
+
 ## [0.7.1] 2019-12-16
 ### Removed
  * 'Call to an undefined method yii\console\Response' ignored error

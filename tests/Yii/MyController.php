@@ -43,6 +43,8 @@ final class MyController extends \yii\web\Controller
 
         $flag = \Yii::$app->customComponent->flag;
 
+        $objectClass = \SplObjectStorage::class;
+        \Yii::createObject($objectClass)->count();
         \Yii::createObject(\SplObjectStorage::class)->count();
         \Yii::createObject('SplObjectStorage')->count();
         \Yii::createObject(['class' => '\SplObjectStorage'])->count();
