@@ -30,16 +30,10 @@ final class ServiceMap
 
         $config = require $configPath;
         foreach ($config['container']['singletons'] ?? [] as $id => $service) {
-            if ($service instanceof \Closure || \is_string($service)) {
-                $returnType = (new \ReflectionFunction($service))->getReturnType();
-                if (!$returnType instanceof \ReflectionNamedType) {
-                    throw new \RuntimeException(sprintf('Please provide return type for %s service closure', $id));
-                }
-
-                $this->services[$id] = $returnType->getName();
-            } else {
-                $this->services[$id] = $service['class'] ?? $service[0]['class'];
-            }
+            $this->addServiceDefinition($id, $service);
+        }
+        foreach ($config['container']['definitions'] ?? [] as $id => $service) {
+            $this->addServiceDefinition($id, $service);
         }
 
         foreach ($config['components'] ?? [] as $id => $component) {
@@ -84,5 +78,24 @@ final class ServiceMap
     public function getComponentIdentityClassById(string $id): ?string
     {
         return $this->components[$id]['identityClass'] ?? null;
+    }
+
+    /**
+     * @param string $id
+     * @param string|\Closure|array<mixed> $service
+     * @throws \ReflectionException
+     */
+    private function addServiceDefinition(string $id, $service): void
+    {
+        if ($service instanceof \Closure || \is_string($service)) {
+            $returnType = (new \ReflectionFunction($service))->getReturnType();
+            if (!$returnType instanceof \ReflectionNamedType) {
+                throw new \RuntimeException(sprintf('Please provide return type for %s service closure', $id));
+            }
+
+            $this->services[$id] = $returnType->getName();
+        } else {
+            $this->services[$id] = $service['class'] ?? $service[0]['class'];
+        }
     }
 }

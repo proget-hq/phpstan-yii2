@@ -11,6 +11,15 @@ return [
     ],
     'container' => [
         'singletons' => [
+            'singleton-closure' => function(): \SplStack {
+                return new \SplStack();
+            },
+            'singleton-service' => ['class' => \SplObjectStorage::class],
+            'singleton-nested-service-class' => [
+                ['class' => \SplFileInfo::class]
+            ]
+        ],
+        'definitions' => [
             'closure' => function(): \SplStack {
                 return new \SplStack();
             },

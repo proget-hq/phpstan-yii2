@@ -39,6 +39,10 @@ final class ServiceMapTest extends TestCase
     {
         $serviceMap = new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-valid.php');
 
+        $this->assertSame(\SplStack::class, $serviceMap->getServiceClassFromNode(new String_('singleton-closure')));
+        $this->assertSame(\SplObjectStorage::class, $serviceMap->getServiceClassFromNode(new String_('singleton-service')));
+        $this->assertSame(\SplFileInfo::class, $serviceMap->getServiceClassFromNode(new String_('singleton-nested-service-class')));
+
         $this->assertSame(\SplStack::class, $serviceMap->getServiceClassFromNode(new String_('closure')));
         $this->assertSame(\SplObjectStorage::class, $serviceMap->getServiceClassFromNode(new String_('service')));
         $this->assertSame(\SplFileInfo::class, $serviceMap->getServiceClassFromNode(new String_('nested-service-class')));
