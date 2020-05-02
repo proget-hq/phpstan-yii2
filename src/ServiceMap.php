@@ -46,10 +46,6 @@ final class ServiceMap
                 throw new \RuntimeException(sprintf('Invalid value for component with id %s. Expected object or array.', $id));
             }
 
-            if (null !== $identityClass = $component['identityClass'] ?? null) {
-                $this->components[$id]['identityClass'] = $identityClass;
-            }
-
             if (null !== $class = $component['class'] ?? null) {
                 $this->components[$id]['class'] = $class;
             }
@@ -75,10 +71,6 @@ final class ServiceMap
         return $this->components[$id]['class'] ?? null;
     }
 
-    public function getComponentIdentityClassById(string $id): ?string
-    {
-        return $this->components[$id]['identityClass'] ?? null;
-    }
 
     /**
      * @param string $id
