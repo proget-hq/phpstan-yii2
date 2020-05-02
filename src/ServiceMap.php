@@ -71,10 +71,9 @@ final class ServiceMap
         return $this->components[$id]['class'] ?? null;
     }
 
-
     /**
-     * @param string $id
      * @param string|\Closure|array<mixed> $service
+     *
      * @throws \ReflectionException
      */
     private function addServiceDefinition(string $id, $service): void
