@@ -14,12 +14,12 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^7.2|^8.0",
         "nikic/php-parser": "^4.1.0",
         "phpstan/phpstan": "^0.12"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.13",
+        "friendsofphp/php-cs-fixer": "^2.18",
         "phpunit/phpunit": "^8.0",
         "yiisoft/yii2": "^2.0.15",
         "phpstan/phpstan-phpunit": "^0.12"
@@ -44,5 +44,11 @@
         "fix-cs": "php-cs-fixer fix",
         "stan": "phpstan analyse -l max -c ./phpstan.neon ./src ./tests",
         "tests": "phpunit"
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }
