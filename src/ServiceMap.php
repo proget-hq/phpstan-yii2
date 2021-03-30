@@ -74,6 +74,12 @@ final class ServiceMap
      */
     private function addServiceDefinition(string $id, $service): void
     {
+        if (\is_string($service) && \class_exists($service)) {
+            $this->services[$id] = $service;
+
+            return;
+        }
+
         if ($service instanceof \Closure || \is_string($service)) {
             $returnType = (new \ReflectionFunction($service))->getReturnType();
             if (!$returnType instanceof \ReflectionNamedType) {
