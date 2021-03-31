@@ -70,14 +70,22 @@ final class ServiceMap
     /**
      * @param string|\Closure|array<mixed> $service
      *
-     * @throws \ReflectionException
+     * @throws \RuntimeException
      */
     private function addServiceDefinition(string $id, $service): void
     {
-        if (\is_string($service) && \class_exists($service)) {
-            $this->services[$id] = $service;
+        $this->services[$id] = $this->guessServiceDefinition($id, $service);
+    }
 
-            return;
+    /**
+     * @param string|\Closure|array<mixed> $service
+     *
+     * @throws \ReflectionException
+     */
+    private function guessServiceDefinition(string $id, $service): string
+    {
+        if (\is_string($service) && \class_exists($service)) {
+            return $service;
         }
 
         if ($service instanceof \Closure || \is_string($service)) {
@@ -86,9 +94,21 @@ final class ServiceMap
                 throw new \RuntimeException(sprintf('Please provide return type for %s service closure', $id));
             }
 
-            $this->services[$id] = $returnType->getName();
-        } else {
-            $this->services[$id] = $service['class'] ?? $service[0]['class'];
+            return $returnType->getName();
         }
+
+        if (!is_array($service)) {
+            throw new \RuntimeException(\sprintf('Unsupported service definition for %s', $id));
+        }
+
+        if (isset($service['class'])) {
+            return $service['class'];
+        }
+
+        if (isset($service[0]['class'])) {
+            return $service[0]['class'];
+        }
+
+        throw new \RuntimeException(\sprintf('Cannot guess service definition for %s', $id));
     }
 }

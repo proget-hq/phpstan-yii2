@@ -11,6 +11,7 @@ return [
     ],
     'container' => [
         'singletons' => [
+            'singleton-string' => MyActiveRecord::class,
             'singleton-closure' => function(): \SplStack {
                 return new \SplStack();
             },
