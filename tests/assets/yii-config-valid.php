@@ -27,7 +27,10 @@ return [
             'service' => ['class' => \SplObjectStorage::class],
             'nested-service-class' => [
                 ['class' => \SplFileInfo::class]
-            ]
+            ],
+            MyActiveRecord::class => [
+                'flag' => 'foo',
+            ],
         ]
     ]
 ];

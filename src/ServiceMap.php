@@ -109,6 +109,10 @@ final class ServiceMap
             return $service[0]['class'];
         }
 
+        if (\is_subclass_of($id, BaseObject::class)) {
+            return $id;
+        }
+
         throw new \RuntimeException(\sprintf('Cannot guess service definition for %s', $id));
     }
 }
