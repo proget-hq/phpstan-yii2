@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Proget\PHPStan\Yii2;
 
 use PhpParser\Node;
+use yii\base\BaseObject;
 
 final class ServiceMap
 {
