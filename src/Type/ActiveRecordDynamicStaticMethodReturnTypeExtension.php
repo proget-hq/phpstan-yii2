@@ -10,7 +10,6 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\NullType;
-use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
 
@@ -36,7 +35,7 @@ final class ActiveRecordDynamicStaticMethodReturnTypeExtension implements Dynami
         if ($methodName === 'findOne') {
             return TypeCombinator::union(
                 new NullType(),
-                new ObjectType($name)
+                new ActiveRecordObjectType($name)
             );
         }
 

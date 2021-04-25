@@ -15,7 +15,6 @@ use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\IntegerType;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\NullType;
-use PHPStan\Type\ObjectType;
 use PHPStan\Type\StringType;
 use PHPStan\Type\ThisType;
 use PHPStan\Type\Type;
@@ -61,13 +60,13 @@ final class ActiveQueryDynamicMethodReturnTypeExtension implements DynamicMethod
         if ($methodName === 'one') {
             return TypeCombinator::union(
                 new NullType(),
-                $calledOnType->isAsArray() ? new ArrayType(new StringType(), new MixedType()) : new ObjectType($calledOnType->getModelClass())
+                $calledOnType->isAsArray() ? new ArrayType(new StringType(), new MixedType()) : new ActiveRecordObjectType($calledOnType->getModelClass())
             );
         }
 
         return new ArrayType(
             new IntegerType(),
-            $calledOnType->isAsArray() ? new ArrayType(new StringType(), new MixedType()) : new ObjectType($calledOnType->getModelClass())
+            $calledOnType->isAsArray() ? new ArrayType(new StringType(), new MixedType()) : new ActiveRecordObjectType($calledOnType->getModelClass())
         );
     }
 }

@@ -8,15 +8,20 @@ final class MyController extends \yii\web\Controller
 {
     public function actionMy(): void
     {
+        $offsetProp = 'flag';
+        $flag = false;
         $record = MyActiveRecord::find()->where(['flag' => \Yii::$app->request->post('flag', true)])->one();
         if ($record) {
             $record->flag = false;
+            $flag = $record[$offsetProp];
+            $record[$offsetProp] = true;
             $record->save();
         }
 
         $record = MyActiveRecord::findOne(['condition']);
         if ($record) {
             $flag = $record->flag;
+            $flag = $record['flag'];
         }
 
         $records = MyActiveRecord::find()->asArray()->where(['flag' => \Yii::$app->request->post('flag', true)])->all();
@@ -33,6 +38,7 @@ final class MyController extends \yii\web\Controller
         foreach ($records as $record) {
             $flag = $record->flag;
             $flag = $record['flag'];
+            $record['flag'] = true;
         }
 
         \Yii::$app->response->data = \Yii::$app->request->rawBody;

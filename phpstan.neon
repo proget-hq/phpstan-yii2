@@ -5,7 +5,7 @@ includes:
 	- extension.neon
 
 parameters:
-    autoload_files:
+    scanFiles:
         - vendor/yiisoft/yii2/Yii.php
 
     yii2:
