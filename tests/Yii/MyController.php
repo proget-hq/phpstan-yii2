@@ -24,6 +24,12 @@ final class MyController extends \yii\web\Controller
             $flag = $record['flag'];
         }
 
+        $record = MyActiveRecord::findBySql('');
+        if ($record = $record->one()) {
+            $flag = $record->flag;
+            $flag = $record['flag'];
+        }
+
         $records = MyActiveRecord::find()->asArray()->where(['flag' => \Yii::$app->request->post('flag', true)])->all();
         foreach ($records as $record) {
             $flag = $record['flag'];
