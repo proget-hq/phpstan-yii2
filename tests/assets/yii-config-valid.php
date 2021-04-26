@@ -11,6 +11,7 @@ return [
     ],
     'container' => [
         'singletons' => [
+            'singleton-string' => MyActiveRecord::class,
             'singleton-closure' => function(): \SplStack {
                 return new \SplStack();
             },
@@ -26,7 +27,10 @@ return [
             'service' => ['class' => \SplObjectStorage::class],
             'nested-service-class' => [
                 ['class' => \SplFileInfo::class]
-            ]
+            ],
+            MyActiveRecord::class => [
+                'flag' => 'foo',
+            ],
         ]
     ]
 ];

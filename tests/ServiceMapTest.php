@@ -27,6 +27,22 @@ final class ServiceMapTest extends TestCase
         new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-invalid.php');
     }
 
+    public function testThrowExceptionWhenServiceHasUnsupportedType(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Unsupported service definition for unsupported-type');
+
+        new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-invalid-unsupported-type.php');
+    }
+
+    public function testThrowExceptionWhenServiceHasUnsupportedArray(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Cannot guess service definition for unsupported-array');
+
+        new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-invalid-unsupported-array.php');
+    }
+
     public function testThrowExceptionWhenComponentHasInvalidValue(): void
     {
         $this->expectException(\RuntimeException::class);
@@ -39,6 +55,8 @@ final class ServiceMapTest extends TestCase
     {
         $serviceMap = new ServiceMap(__DIR__.DIRECTORY_SEPARATOR.'assets'.DIRECTORY_SEPARATOR.'yii-config-valid.php');
 
+        self::assertSame(MyActiveRecord::class, $serviceMap->getServiceClassFromNode(new String_('singleton-string')));
+        self::assertSame(MyActiveRecord::class, $serviceMap->getServiceClassFromNode(new String_(MyActiveRecord::class)));
         self::assertSame(\SplStack::class, $serviceMap->getServiceClassFromNode(new String_('singleton-closure')));
         self::assertSame(\SplObjectStorage::class, $serviceMap->getServiceClassFromNode(new String_('singleton-service')));
         self::assertSame(\SplFileInfo::class, $serviceMap->getServiceClassFromNode(new String_('singleton-nested-service-class')));

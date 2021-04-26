@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Proget\PHPStan\Yii2;
 
 use PhpParser\Node;
+use yii\base\BaseObject;
 
 final class ServiceMap
 {
@@ -33,18 +34,19 @@ final class ServiceMap
         foreach ($config['container']['singletons'] ?? [] as $id => $service) {
             $this->addServiceDefinition($id, $service);
         }
+
         foreach ($config['container']['definitions'] ?? [] as $id => $service) {
             $this->addServiceDefinition($id, $service);
         }
 
         foreach ($config['components'] ?? [] as $id => $component) {
-            if (is_object($component)) {
+            if (\is_object($component)) {
                 $this->components[$id] = \get_class($component);
                 continue;
             }
 
-            if (!is_array($component)) {
-                throw new \RuntimeException(sprintf('Invalid value for component with id %s. Expected object or array.', $id));
+            if (!\is_array($component)) {
+                throw new \RuntimeException(\sprintf('Invalid value for component with id %s. Expected object or array.', $id));
             }
 
             if (null !== $class = $component['class'] ?? null) {
@@ -70,19 +72,49 @@ final class ServiceMap
     /**
      * @param string|\Closure|array<mixed> $service
      *
-     * @throws \ReflectionException
+     * @throws \RuntimeException|\ReflectionException
      */
     private function addServiceDefinition(string $id, $service): void
     {
+        $this->services[$id] = $this->guessServiceDefinition($id, $service);
+    }
+
+    /**
+     * @param string|\Closure|array<mixed> $service
+     *
+     * @throws \RuntimeException|\ReflectionException
+     */
+    private function guessServiceDefinition(string $id, $service): string
+    {
+        if (\is_string($service) && \class_exists($service)) {
+            return $service;
+        }
+
         if ($service instanceof \Closure || \is_string($service)) {
             $returnType = (new \ReflectionFunction($service))->getReturnType();
             if (!$returnType instanceof \ReflectionNamedType) {
-                throw new \RuntimeException(sprintf('Please provide return type for %s service closure', $id));
+                throw new \RuntimeException(\sprintf('Please provide return type for %s service closure', $id));
             }
 
-            $this->services[$id] = $returnType->getName();
-        } else {
-            $this->services[$id] = $service['class'] ?? $service[0]['class'];
+            return $returnType->getName();
         }
+
+        if (!\is_array($service)) {
+            throw new \RuntimeException(\sprintf('Unsupported service definition for %s', $id));
+        }
+
+        if (isset($service['class'])) {
+            return $service['class'];
+        }
+
+        if (isset($service[0]['class'])) {
+            return $service[0]['class'];
+        }
+
+        if (\is_subclass_of($id, BaseObject::class)) {
+            return $id;
+        }
+
+        throw new \RuntimeException(\sprintf('Cannot guess service definition for %s', $id));
     }
 }
