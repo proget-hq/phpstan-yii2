@@ -12,6 +12,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  * **Fixed** for any bug fixes.
  * **Security** in case of vulnerabilities.
 
+## [0.7.4] 2021-04-26
+### Added
+ * Enable PHP 8.0 (#35)
+ * Resolve services defined by string & BaseObject configurations (#38)
+ * Resolve ActiveRecord stan type from static method return type (#40)
+ * Ensure YII_DEBUG is defined (#41)
+
+### Fixed
+ * ActiveRecord array access (#39)
+
 ## [0.7.3] 2020-07-13
 ### Added
  * Add support for non-singleton services (definitions) (#30)
