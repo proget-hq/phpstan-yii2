@@ -14,7 +14,7 @@ final class ServiceMap
     private $services = [];
 
     /**
-     * @var (string[]|object)[]
+     * @var array<string, string>
      */
     private $components = [];
 
@@ -39,7 +39,7 @@ final class ServiceMap
 
         foreach ($config['components'] ?? [] as $id => $component) {
             if (is_object($component)) {
-                $this->components[$id] = $component;
+                $this->components[$id] = \get_class($component);
                 continue;
             }
 
@@ -48,7 +48,7 @@ final class ServiceMap
             }
 
             if (null !== $class = $component['class'] ?? null) {
-                $this->components[$id]['class'] = $class;
+                $this->components[$id] = $class;
             }
         }
     }
@@ -64,12 +64,7 @@ final class ServiceMap
 
     public function getComponentClassById(string $id): ?string
     {
-        // Special case in which the component is already initialized
-        if (isset($this->components[$id]) && is_object($this->components[$id])) {
-            return get_class($this->components[$id]);
-        }
-
-        return $this->components[$id]['class'] ?? null;
+        return $this->components[$id] ?? null;
     }
 
     /**
