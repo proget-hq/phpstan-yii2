@@ -24,6 +24,7 @@ final class ServiceMap
             throw new \InvalidArgumentException(sprintf('Provided config path %s must exist', $configPath));
         }
 
+        \defined('YII_DEBUG') or \define('YII_DEBUG', true);
         \defined('YII_ENV_DEV') or \define('YII_ENV_DEV', false);
         \defined('YII_ENV_PROD') or \define('YII_ENV_PROD', false);
         \defined('YII_ENV_TEST') or \define('YII_ENV_TEST', true);
