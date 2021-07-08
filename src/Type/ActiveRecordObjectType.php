@@ -25,7 +25,7 @@ class ActiveRecordObjectType extends ObjectType
         return parent::hasOffsetValueType($offsetType);
     }
 
-    public function setOffsetValueType(?Type $offsetType, Type $valueType): Type
+    public function setOffsetValueType(?Type $offsetType, Type $valueType, bool $unionValues = true): Type
     {
         if ($offsetType instanceof ConstantStringType && $this->hasProperty($offsetType->getValue())->no()) {
             return new ErrorType();
