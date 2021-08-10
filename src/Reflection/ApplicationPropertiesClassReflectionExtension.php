@@ -44,11 +44,11 @@ final class ApplicationPropertiesClassReflectionExtension implements PropertiesC
 
     public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
     {
-        if (!\in_array($classReflection->getName(), ['yii\console\Application', 'yii\web\Application'], true)) {
+        if ($classReflection->getName() !== 'yii\base\Application' && !$classReflection->isSubclassOf('yii\base\Application')) {
             return false;
         }
 
-        if ($classReflection->getName() === 'yii\console\Application') {
+        if ($classReflection->getName() !== 'yii\web\Application') {
             $classReflection = $this->broker->getClass('yii\web\Application');
         }
 
@@ -59,7 +59,7 @@ final class ApplicationPropertiesClassReflectionExtension implements PropertiesC
 
     public function getProperty(ClassReflection $classReflection, string $propertyName): PropertyReflection
     {
-        if ($classReflection->getName() === 'yii\console\Application') {
+        if ($classReflection->getName() !== 'yii\web\Application') {
             $classReflection = $this->broker->getClass('yii\web\Application');
         }
 
