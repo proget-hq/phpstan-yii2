@@ -4,7 +4,9 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__.DIRECTORY_SEPARATOR.'src')
 ;
 
-return PhpCsFixer\Config::create()
+$config = new PhpCsFixer\Config();
+
+return $config
     ->setRiskyAllowed(true)
     ->setRules([
         '@PHP71Migration' => true,
@@ -16,11 +18,16 @@ return PhpCsFixer\Config::create()
         'no_useless_else' => true,
         'no_useless_return' => true,
         'ordered_imports' => [
-            'importsOrder' => null,
-            'sortAlgorithm' => 'alpha',
+            'imports_order' => null,
+            'sort_algorithm' => 'alpha',
         ],
         'phpdoc_order' => true,
-        'yoda_style' => null,
+        'yoda_style' => [
+            'equal' => null,
+            'identical' => null,
+            'less_and_greater' => null,
+            'always_move_variable' => false,
+        ],
         // risky -->
         'strict_param' => true,
     ])
