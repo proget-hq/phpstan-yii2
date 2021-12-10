@@ -26,9 +26,6 @@ services:
         class: Proget\PHPStan\Yii2\Reflection\UserPropertiesClassReflectionExtension
         tags: [phpstan.broker.propertiesClassReflectionExtension]
     -
-        class: Proget\PHPStan\Yii2\Type\ActiveQueryDynamicMethodReturnTypeExtension
-        tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
-    -
         class: Proget\PHPStan\Yii2\Type\ActiveRecordDynamicMethodReturnTypeExtension
         tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
     -
