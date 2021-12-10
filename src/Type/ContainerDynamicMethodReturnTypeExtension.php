@@ -28,7 +28,7 @@ final class ContainerDynamicMethodReturnTypeExtension implements DynamicMethodRe
 
     public function getClass(): string
     {
-        return 'yii\di\Container';
+        return \yii\di\Container::class;
     }
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
