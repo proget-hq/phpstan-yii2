@@ -24,7 +24,7 @@ final class ActiveQueryDynamicMethodReturnTypeExtension implements DynamicMethod
 {
     public function getClass(): string
     {
-        return 'yii\db\ActiveQuery';
+        return \yii\db\ActiveQuery::class;
     }
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
