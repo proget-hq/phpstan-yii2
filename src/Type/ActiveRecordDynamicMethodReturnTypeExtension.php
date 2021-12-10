@@ -16,7 +16,7 @@ final class ActiveRecordDynamicMethodReturnTypeExtension implements DynamicMetho
 {
     public function getClass(): string
     {
-        return 'yii\db\ActiveRecord';
+        return \yii\db\ActiveRecord::class;
     }
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
