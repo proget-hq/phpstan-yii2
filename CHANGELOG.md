@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  * **Fixed** for any bug fixes.
  * **Security** in case of vulnerabilities.
 
+## [0.8.0] Unreleased
+### Added
+ * Initial phpstan 1.x support
+
 ## [0.7.6] 2021-08-10
 ### Added
  * Compatibility with yii 2.0.43 (#45)

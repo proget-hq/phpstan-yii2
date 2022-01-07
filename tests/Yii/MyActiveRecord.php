@@ -10,7 +10,7 @@ namespace Proget\Tests\PHPStan\Yii2\Yii;
 final class MyActiveRecord extends \yii\db\ActiveRecord
 {
     /**
-     * @return self[]
+     * @return self<string, mixed>[]
      */
     public function getSiblings(): array
     {
@@ -26,7 +26,7 @@ final class MyActiveRecord extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return self[]
+     * @return self<string, mixed>[]
      */
     public function test(): array
     {

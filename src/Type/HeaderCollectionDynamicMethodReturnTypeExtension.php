@@ -30,12 +30,12 @@ class HeaderCollectionDynamicMethodReturnTypeExtension implements DynamicMethodR
 
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
     {
-        if (count($methodCall->args) < 3) {
+        if (\count($methodCall->args) < 3) {
             // $first === true (the default) and the get-method returns something of type string
             return new StringType();
         }
 
-        $val = $methodCall->args[2]->value;
+        $val = $methodCall->getArgs()[2]->value;
         if ($val instanceof ConstFetch) {
             $value = $val->name->parts[0];
             if ($value === 'true') {

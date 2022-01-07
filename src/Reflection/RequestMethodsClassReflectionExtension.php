@@ -4,35 +4,36 @@ declare(strict_types=1);
 
 namespace Proget\PHPStan\Yii2\Reflection;
 
-use PHPStan\Broker\Broker;
-use PHPStan\Reflection\BrokerAwareExtension;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Reflection\MethodsClassReflectionExtension;
+use PHPStan\Reflection\ReflectionProvider;
+use yii\console\Request as ConsoleRequest;
+use yii\web\Request as WebRequest;
 
-final class RequestMethodsClassReflectionExtension implements MethodsClassReflectionExtension, BrokerAwareExtension
+final class RequestMethodsClassReflectionExtension implements MethodsClassReflectionExtension
 {
     /**
-     * @var Broker
+     * @var ReflectionProvider
      */
-    private $broker;
+    private $reflectionProvider;
 
-    public function setBroker(Broker $broker): void
+    public function __construct(ReflectionProvider $reflectionProvider)
     {
-        $this->broker = $broker;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function hasMethod(ClassReflection $classReflection, string $methodName): bool
     {
-        if ($classReflection->getName() !== 'yii\console\Request') {
+        if ($classReflection->getName() !== ConsoleRequest::class) {
             return false;
         }
 
-        return $this->broker->getClass('yii\web\Request')->hasMethod($methodName);
+        return $this->reflectionProvider->getClass(WebRequest::class)->hasMethod($methodName);
     }
 
     public function getMethod(ClassReflection $classReflection, string $methodName): MethodReflection
     {
-        return $this->broker->getClass('yii\web\Request')->getNativeMethod($methodName);
+        return $this->reflectionProvider->getClass(WebRequest::class)->getNativeMethod($methodName);
     }
 }

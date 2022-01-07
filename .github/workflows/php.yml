@@ -4,10 +4,21 @@ on: [push,pull_request]
 
 jobs:
   build:
-
+    name: "Tests (PHP: ${{ matrix.php-version}})"
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['7.4', '8.0']
 
     steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          ini-values: "memory_limit=-1"
+          coverage: none
+
       - uses: actions/checkout@v1
 
       - name: Get Composer Cache Directory
