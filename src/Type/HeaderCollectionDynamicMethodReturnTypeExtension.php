@@ -35,7 +35,7 @@ class HeaderCollectionDynamicMethodReturnTypeExtension implements DynamicMethodR
             return new StringType();
         }
 
-        $val = $methodCall->args[2]->value;
+        $val = $methodCall->getArgs()[2]->value;
         if ($val instanceof ConstFetch) {
             $value = $val->name->parts[0];
             if ($value === 'true') {

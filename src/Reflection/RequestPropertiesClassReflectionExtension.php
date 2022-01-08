@@ -5,22 +5,21 @@ declare(strict_types=1);
 namespace Proget\PHPStan\Yii2\Reflection;
 
 use PHPStan\Analyser\OutOfClassScope;
-use PHPStan\Broker\Broker;
-use PHPStan\Reflection\BrokerAwareExtension;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\PropertiesClassReflectionExtension;
 use PHPStan\Reflection\PropertyReflection;
+use PHPStan\Reflection\ReflectionProvider;
 
-final class RequestPropertiesClassReflectionExtension implements PropertiesClassReflectionExtension, BrokerAwareExtension
+final class RequestPropertiesClassReflectionExtension implements PropertiesClassReflectionExtension
 {
     /**
-     * @var Broker
+     * @var ReflectionProvider
      */
-    private $broker;
+    private $reflectionProvider;
 
-    public function setBroker(Broker $broker): void
+    public function __construct(ReflectionProvider $reflectionProvider)
     {
-        $this->broker = $broker;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
@@ -29,11 +28,11 @@ final class RequestPropertiesClassReflectionExtension implements PropertiesClass
             return false;
         }
 
-        return $this->broker->getClass('yii\web\Request')->hasProperty($propertyName);
+        return $this->reflectionProvider->getClass('yii\web\Request')->hasProperty($propertyName);
     }
 
     public function getProperty(ClassReflection $classReflection, string $propertyName): PropertyReflection
     {
-        return $this->broker->getClass('yii\web\Request')->getProperty($propertyName, new OutOfClassScope());
+        return $this->reflectionProvider->getClass('yii\web\Request')->getProperty($propertyName, new OutOfClassScope());
     }
 }

@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Proget\PHPStan\Yii2\Reflection;
 
-use PHPStan\Broker\Broker;
 use PHPStan\Reflection\Annotations\AnnotationsPropertiesClassReflectionExtension;
-use PHPStan\Reflection\BrokerAwareExtension;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\Dummy\DummyPropertyReflection;
 use PHPStan\Reflection\PropertiesClassReflectionExtension;
 use PHPStan\Reflection\PropertyReflection;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\ObjectType;
 use Proget\PHPStan\Yii2\ServiceMap;
 
-final class ApplicationPropertiesClassReflectionExtension implements PropertiesClassReflectionExtension, BrokerAwareExtension
+final class ApplicationPropertiesClassReflectionExtension implements PropertiesClassReflectionExtension
 {
     /**
      * @var AnnotationsPropertiesClassReflectionExtension
@@ -22,24 +21,20 @@ final class ApplicationPropertiesClassReflectionExtension implements PropertiesC
     private $annotationsProperties;
 
     /**
-     * @var Broker
-     */
-    private $broker;
-
-    /**
      * @var ServiceMap
      */
     private $serviceMap;
 
-    public function __construct(AnnotationsPropertiesClassReflectionExtension $annotationsProperties, ServiceMap $serviceMap)
+    /**
+     * @var ReflectionProvider
+     */
+    private $reflectionProvider;
+
+    public function __construct(AnnotationsPropertiesClassReflectionExtension $annotationsProperties, ServiceMap $serviceMap, ReflectionProvider $reflectionProvider)
     {
         $this->annotationsProperties = $annotationsProperties;
         $this->serviceMap = $serviceMap;
-    }
-
-    public function setBroker(Broker $broker): void
-    {
-        $this->broker = $broker;
+        $this->reflectionProvider = $reflectionProvider;
     }
 
     public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
@@ -49,18 +44,18 @@ final class ApplicationPropertiesClassReflectionExtension implements PropertiesC
         }
 
         if ($classReflection->getName() !== 'yii\web\Application') {
-            $classReflection = $this->broker->getClass('yii\web\Application');
+            $classReflection = $this->reflectionProvider->getClass('yii\web\Application');
         }
 
         return $classReflection->hasNativeProperty($propertyName)
-            || $this->annotationsProperties->hasProperty($classReflection, $propertyName)
+            || array_key_exists($propertyName, $classReflection->getPropertyTags())
             || $this->serviceMap->getComponentClassById($propertyName);
     }
 
     public function getProperty(ClassReflection $classReflection, string $propertyName): PropertyReflection
     {
         if ($classReflection->getName() !== 'yii\web\Application') {
-            $classReflection = $this->broker->getClass('yii\web\Application');
+            $classReflection = $this->reflectionProvider->getClass('yii\web\Application');
         }
 
         if (null !== $componentClass = $this->serviceMap->getComponentClassById($propertyName)) {

@@ -26,7 +26,7 @@ final class ActiveRecordDynamicMethodReturnTypeExtension implements DynamicMetho
 
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
     {
-        $argType = $scope->getType($methodCall->args[0]->value);
+        $argType = $scope->getType($methodCall->getArgs()[0]->value);
         if (!$argType instanceof ConstantStringType) {
             throw new ShouldNotHappenException(sprintf('Invalid argument provided to method %s'.PHP_EOL.'Hint: You should use ::class instead of ::className()', $methodReflection->getName()));
         }

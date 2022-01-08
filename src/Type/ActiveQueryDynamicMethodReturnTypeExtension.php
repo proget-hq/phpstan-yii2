@@ -45,7 +45,7 @@ final class ActiveQueryDynamicMethodReturnTypeExtension implements DynamicMethod
 
         $methodName = $methodReflection->getName();
         if ($methodName === 'asArray') {
-            $argType = isset($methodCall->args[0]) ? $scope->getType($methodCall->args[0]->value) : new ConstantBooleanType(true);
+            $argType = isset($methodCall->getArgs()[0]) ? $scope->getType($methodCall->getArgs()[0]->value) : new ConstantBooleanType(true);
             if (!$argType instanceof ConstantBooleanType) {
                 throw new ShouldNotHappenException(sprintf('Invalid argument provided to asArray method at line %d', $methodCall->getLine()));
             }
