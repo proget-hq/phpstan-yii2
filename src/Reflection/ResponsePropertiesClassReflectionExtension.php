@@ -9,8 +9,8 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\PropertiesClassReflectionExtension;
 use PHPStan\Reflection\PropertyReflection;
 use PHPStan\Reflection\ReflectionProvider;
-use yii\console\Request as ConsoleRequest;
-use yii\web\Response as WebReqwuest;
+use yii\console\Response as ConsoleResponse;
+use yii\web\Response as WebResponse;
 
 final class ResponsePropertiesClassReflectionExtension implements PropertiesClassReflectionExtension
 {
@@ -26,15 +26,15 @@ final class ResponsePropertiesClassReflectionExtension implements PropertiesClas
 
     public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
     {
-        if ($classReflection->getName() !== ConsoleRequest::class) {
+        if ($classReflection->getName() !== ConsoleResponse::class) {
             return false;
         }
 
-        return $this->reflectionProvider->getClass(WebReqwuest::class)->hasProperty($propertyName);
+        return $this->reflectionProvider->getClass(WebResponse::class)->hasProperty($propertyName);
     }
 
     public function getProperty(ClassReflection $classReflection, string $propertyName): PropertyReflection
     {
-        return $this->reflectionProvider->getClass(WebReqwuest::class)->getProperty($propertyName, new OutOfClassScope());
+        return $this->reflectionProvider->getClass(WebResponse::class)->getProperty($propertyName, new OutOfClassScope());
     }
 }
