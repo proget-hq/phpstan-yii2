@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Proget\PHPStan\Yii2\Type;
 
+use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\ConstFetch;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
@@ -35,9 +36,10 @@ class HeaderCollectionDynamicMethodReturnTypeExtension implements DynamicMethodR
             return new StringType();
         }
 
-        $val = $methodCall->getArgs()[2]->value;
-        if ($val instanceof ConstFetch) {
-            $value = $val->name->parts[0];
+        /** @var Arg $arg */
+        $arg = $methodCall->args[2];
+        if ($arg->value instanceof ConstFetch) {
+            $value = $arg->value->name->parts[0];
             if ($value === 'true') {
                 // $first === true, therefore string
                 return new StringType();
