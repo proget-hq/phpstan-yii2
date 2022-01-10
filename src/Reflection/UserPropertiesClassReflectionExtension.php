@@ -10,6 +10,7 @@ use PHPStan\Reflection\Dummy\DummyPropertyReflection;
 use PHPStan\Reflection\PropertiesClassReflectionExtension;
 use PHPStan\Reflection\PropertyReflection;
 use PHPStan\Type\MixedType;
+use yii\web\User;
 
 final class UserPropertiesClassReflectionExtension implements PropertiesClassReflectionExtension
 {
@@ -25,7 +26,7 @@ final class UserPropertiesClassReflectionExtension implements PropertiesClassRef
 
     public function hasProperty(ClassReflection $classReflection, string $propertyName): bool
     {
-        if ($classReflection->getName() !== 'yii\web\User') {
+        if ($classReflection->getName() !== User::class) {
             return false;
         }
 

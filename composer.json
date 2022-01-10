@@ -16,13 +16,13 @@
     "require": {
         "php": "^7.2|^8.0",
         "nikic/php-parser": "^4.1.0",
-        "phpstan/phpstan": "^0.12.91"
+        "phpstan/phpstan": "^1.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.1",
         "phpunit/phpunit": "^8.0",
         "yiisoft/yii2": "^2.0.42",
-        "phpstan/phpstan-phpunit": "^0.12"
+        "phpstan/phpstan-phpunit": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -40,15 +40,20 @@
             "@stan",
             "@tests"
         ],
-        "check-cs": "php-cs-fixer fix --dry-run --diff",
-        "fix-cs": "php-cs-fixer fix",
-        "stan": "phpstan analyse -l max -c ./phpstan.neon ./src ./tests",
-        "tests": "phpunit"
+        "check-cs": "@php php-cs-fixer fix --dry-run --diff",
+        "fix-cs": "@php php-cs-fixer fix",
+        "stan": "@php phpstan analyse -l max -c ./phpstan.neon ./src ./tests",
+        "tests": "@php phpunit"
     },
     "repositories": [
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
+    }
 }

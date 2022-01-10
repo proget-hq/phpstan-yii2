@@ -4,10 +4,27 @@ on: [push,pull_request]
 
 jobs:
   build:
-
+    name: "Tests (PHP: ${{ matrix.php-version}}, deps: ${{ matrix.deps }})"
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['7.2', '7.3', '7.4', '8.0']
+        deps: ['lowest', 'locked', 'highest']
+        exclude:
+          - php-version: '7.2'
+            deps: 'locked'
+          - php-version: '7.3'
+            deps: 'locked'
 
     steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          ini-values: "memory_limit=-1"
+          coverage: none
+
       - uses: actions/checkout@v1
 
       - name: Get Composer Cache Directory
@@ -25,8 +42,17 @@ jobs:
       - name: Validate composer.json and composer.lock
         run: composer validate
 
-      - name: Install dependencies
-        run: composer install
+      - name: "Install dependencies (lowest)"
+        if: ${{ matrix.deps == 'lowest' }}
+        run: "composer update --prefer-lowest --no-interaction --no-suggest"
+
+      - name: "Install dependencies (locked)"
+        if: ${{ matrix.deps == 'locked' }}
+        run: "composer install --no-interaction --no-suggest"
+
+      - name: "Install dependencies (highest)"
+        if: ${{ matrix.deps == 'highest' }}
+        run: "composer update --no-interaction --no-suggest"
 
       - name: Run test suite
         run: composer check

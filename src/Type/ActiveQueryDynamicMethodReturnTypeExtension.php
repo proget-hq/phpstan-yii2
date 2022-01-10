@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Proget\PHPStan\Yii2\Type;
 
+use PhpParser\Node\Arg;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
@@ -19,12 +20,13 @@ use PHPStan\Type\StringType;
 use PHPStan\Type\ThisType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
+use yii\db\ActiveQuery;
 
 final class ActiveQueryDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
     public function getClass(): string
     {
-        return 'yii\db\ActiveQuery';
+        return ActiveQuery::class;
     }
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
@@ -45,7 +47,7 @@ final class ActiveQueryDynamicMethodReturnTypeExtension implements DynamicMethod
 
         $methodName = $methodReflection->getName();
         if ($methodName === 'asArray') {
-            $argType = isset($methodCall->args[0]) ? $scope->getType($methodCall->args[0]->value) : new ConstantBooleanType(true);
+            $argType = isset($methodCall->args[0]) && $methodCall->args[0] instanceof Arg ? $scope->getType($methodCall->args[0]->value) : new ConstantBooleanType(true);
             if (!$argType instanceof ConstantBooleanType) {
                 throw new ShouldNotHappenException(sprintf('Invalid argument provided to asArray method at line %d', $methodCall->getLine()));
             }

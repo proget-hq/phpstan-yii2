@@ -6,6 +6,7 @@ namespace Proget\PHPStan\Yii2\Type;
 
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\VerbosityLevel;
+use yii\db\ActiveQuery;
 
 class ActiveQueryObjectType extends ObjectType
 {
@@ -21,7 +22,7 @@ class ActiveQueryObjectType extends ObjectType
 
     public function __construct(string $modelClass, bool $asArray)
     {
-        parent::__construct('yii\db\ActiveQuery');
+        parent::__construct(ActiveQuery::class);
 
         $this->modelClass = $modelClass;
         $this->asArray = $asArray;

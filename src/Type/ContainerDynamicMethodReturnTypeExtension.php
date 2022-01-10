@@ -13,6 +13,7 @@ use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use Proget\PHPStan\Yii2\ServiceMap;
+use yii\di\Container;
 
 final class ContainerDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
@@ -28,7 +29,7 @@ final class ContainerDynamicMethodReturnTypeExtension implements DynamicMethodRe
 
     public function getClass(): string
     {
-        return 'yii\di\Container';
+        return Container::class;
     }
 
     public function isMethodSupported(MethodReflection $methodReflection): bool
