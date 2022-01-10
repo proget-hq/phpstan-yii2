@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
  * **Fixed** for any bug fixes.
  * **Security** in case of vulnerabilities.
 
-## [0.8.0] Unreleased
+## [0.8.0] 2022-01-10
 ### Added
  * Initial phpstan 1.x support
 
