@@ -41,10 +41,6 @@ final class ActiveQueryDynamicMethodReturnTypeExtension implements DynamicMethod
     public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
     {
         $calledOnType = $scope->getType($methodCall->var);
-        if (!$calledOnType instanceof ActiveQueryObjectType) {
-            throw new ShouldNotHappenException(sprintf('Unexpected type %s during method call %s at line %d', \get_class($calledOnType), $methodReflection->getName(), $methodCall->getLine()));
-        }
-
         $methodName = $methodReflection->getName();
         if ($methodName === 'asArray') {
             $argType = isset($methodCall->args[0]) && $methodCall->args[0] instanceof Arg ? $scope->getType($methodCall->args[0]->value) : new ConstantBooleanType(true);
